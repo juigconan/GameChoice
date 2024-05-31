@@ -7,7 +7,7 @@ import com.squareup.picasso.Picasso
 
 class GameViewHolder(val v: View) : RecyclerView.ViewHolder(v)  {
     fun render(gameModel: GameModel) {
-        Picasso.get().load(imagen.source.foto).into(binding.ivCiudad)
-        binding.tvFotografo.text = imagen.fotografo
+      //  Picasso.get().load(imagen.source.foto).into(binding.ivCiudad)
+       // binding.tvFotografo.text = imagen.fotografo
     }
 }
