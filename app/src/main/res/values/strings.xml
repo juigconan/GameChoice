@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">GameChoice</string>
-    <string name="game_vertical_image">https://steamcdn-a.akamaihd.net/steam/apps/{appid}/library_600x900_2x.jpg</string>
     <string name="game_icon">http://media.steampowered.com/steamcommunity/public/images/apps/{appid}/{img_icon_url}.jpg</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.gamechoice
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.gamechoice.databinding.ActivityMainBinding
 import com.example.gamechoice.fragments.ChatFragment
 import com.example.gamechoice.fragments.HomeFragment
@@ -15,24 +16,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setListeners()
     }
+    fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainerView, fragment)
+        fragmentTransaction.commit()
+    }
     fun setListeners(){
         binding.ibHome.setOnClickListener{
             val fragment = HomeFragment()
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(binding.fragmentContainerView.id, fragment, "Fragment home")
-            fragmentTransaction.commit()
+            replaceFragment(fragment)
         }
         binding.ibChat.setOnClickListener{
             val fragment = ChatFragment()
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(binding.fragmentContainerView.id, fragment, "Fragment chat")
-            fragmentTransaction.commit()
+            replaceFragment(fragment)
         }
         binding.ibNotes.setOnClickListener{
             val fragment = NotesFragment()
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(binding.fragmentContainerView.id, fragment, "Fragment notes")
-            fragmentTransaction.commit()
+            replaceFragment(fragment)
         }
 
     }

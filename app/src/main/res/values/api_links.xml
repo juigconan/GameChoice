@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="api_root">https://api.steampowered.com/</string>
+    <string name="owned_games">IPlayerService/GetOwnedGames/v0001/</string>
+    <string name="game_vertical_image">https://steamcdn-a.akamaihd.net/steam/apps/${game.appid}/library_600x900_2x.jpg</string>
+</resources>
