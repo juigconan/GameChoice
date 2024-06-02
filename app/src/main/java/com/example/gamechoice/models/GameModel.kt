@@ -12,6 +12,10 @@ data class Response(
 ): Serializable
 data class Game(
     @SerializedName("appid") val appid: Int,
-    @SerializedName("playtime_forever") val playtime: Int
+    @SerializedName("name") val name: String,
+    @SerializedName("nain") val main: Double,
+    @SerializedName("side") val side: Double,
+    @SerializedName("completionist") val completionist: Double,
+    @SerializedName("all") val all: Double
 ): Serializable
 
