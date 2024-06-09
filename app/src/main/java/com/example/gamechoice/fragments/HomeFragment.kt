@@ -1,52 +1,44 @@
 package com.example.gamechoice.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamechoice.DBConnection
+import com.example.gamechoice.GameActivity
 import com.example.gamechoice.R
 import com.example.gamechoice.adapter.GameAdapter
 import com.example.gamechoice.databinding.FragmentHomeBinding
-import com.example.gamechoice.models.Game
-import com.example.gamechoice.providers.ApiClient.apiClient
+import com.example.gamechoice.models.GameModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.sql.Connection
 import java.sql.PreparedStatement
 
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home){
     private lateinit var binding: FragmentHomeBinding
-    private var gameAdapter = GameAdapter(emptyList())
+    private var gameAdapter = GameAdapter(emptyList()){viewGame(it)}
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: SearchView
     private  var dbConn = DBConnection()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentHomeBinding.inflate(layoutInflater)
-    }/*
-
-    private fun setAdapters(view: View) {
-        val layoutManager = LinearLayoutManager(context)
-        recycler = view.findViewById(R.id.recyclerGames)
-        recycler.layoutManager = layoutManager
-        binding.recyclerGames.adapter = gameAdapter
-    }*/
+    }
 
     private fun setAdapters(view: View) {
         recyclerView = view.findViewById(R.id.recyclerGames)
         searchView = view.findViewById(R.id.searchView)
 
-        gameAdapter = GameAdapter(mutableListOf())
+        gameAdapter = GameAdapter(mutableListOf()){viewGame(it)}
         recyclerView.adapter = gameAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
     }
@@ -54,6 +46,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         setAdapters(view)
+        setListeners()
+        //loadGames()
+        return view
+    }
+
+    private fun setListeners() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 loadGames(query)
@@ -64,25 +62,34 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 return false
             }
         })
-
-        loadGames()
-        return view
     }
+
+    fun viewGame(gameModel: GameModel){
+        val i = Intent(context, GameActivity::class.java).apply {
+            putExtra("GAME", gameModel)
+        }
+        startActivity(i)
+    }
+
     private fun loadGames(game: String?) {
         lifecycleScope.launch (Dispatchers.IO){
-                var lista = mutableListOf<Game>()
+                var lista = mutableListOf<GameModel>()
                 val req: PreparedStatement? = dbConn.dbConnect()?.prepareStatement("SELECT * FROM gamechoice WHERE Name like ?")
                 if (req != null) {
                     req.setString(1, "%$game%")
                     var resultSet = req.executeQuery()
                     while(resultSet.next()){
-                        var game = Game(resultSet.getInt("steamIndex"),
+                        //TODO: Poner bien la imagen y el indice cuando la BD tenga los datos
+                        var gameModel = GameModel(resultSet.getInt("steamIndex"),
                             resultSet.getString("Name"),
                             resultSet.getDouble("Main"),
                             resultSet.getDouble("Main + Sides"),
                             resultSet.getDouble("Completionist"),
-                            resultSet.getDouble("All Styles"))
-                        lista.add(game)
+                            resultSet.getDouble("All Styles"),
+                            //resultSet.getString("Image")
+                            "https://howlongtobeat.com/games/68151_Elden_Ring.jpg?width=250"
+                        )
+                        lista.add(gameModel)
                     }
                     gameAdapter.lista = lista
                     req.close()
@@ -95,12 +102,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    /*
     private fun loadGames() {
         lifecycleScope.launch (Dispatchers.IO){
-            var results = mutableListOf<Game>()
+            var results = mutableListOf<GameModel>()
             try {
                 results.clear()
-                //TODO: Extraer claves de keyvalt de azure
                 results.addAll(apiClient.getOwnedGames("key","steamid").response.games)
             }catch (e: Exception){
                 Log.e("ERROR", "No se ha podido acceder con la API: " + e.message.toString())
@@ -118,5 +125,5 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
     }
-
+    */
 }
