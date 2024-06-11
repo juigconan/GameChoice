@@ -15,3 +15,4 @@
 local.properties
 .idea/caches
 app/src/main/res/values/passwords.xml
+app/google-services.json
