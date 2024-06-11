@@ -14,7 +14,7 @@ class DBConnection{
         StrictMode.setThreadPolicy(policy)
         var conn: Connection? = null
         val connString: String
-        var password = ""
+        var password = R.string.DBPASS.toString()
         try{
             Class.forName("net.sourceforge.jtds.jdbc.Driver")
             // TODO: Cambiar la base de datos
