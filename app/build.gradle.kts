@@ -55,6 +55,8 @@ android {
 
 dependencies {
 
+    implementation("com.google.firebase:firebase-auth:16.0.5")
+    implementation("com.google.android.gms:play-services-auth:18.1.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation(libs.androidx.core.ktx)

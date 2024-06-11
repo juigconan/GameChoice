@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     app:cardBackgroundColor="?android:attr/windowBackground"
     app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
+    app:cardElevation="8dp"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
 
@@ -38,10 +38,9 @@
 
         <TableLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivGameImage"
             app:layout_constraintTop_toBottomOf="@+id/tvGameName">
@@ -49,7 +48,7 @@
             <TableRow
                 android:id="@+id/trMain"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/tvMain"
@@ -66,7 +65,7 @@
             <TableRow
                 android:id="@+id/trSide"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/tvSides"
@@ -77,13 +76,13 @@
                 <TextView
                     android:id="@+id/tvSidesNumber"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </TableRow>
 
             <TableRow
                 android:id="@+id/trCompletion"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/tvCompletionist"
@@ -94,13 +93,13 @@
                 <TextView
                     android:id="@+id/tvCompletionistNumber"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </TableRow>
 
             <TableRow
                 android:id="@+id/trAll"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/tvAll"
@@ -111,7 +110,7 @@
                 <TextView
                     android:id="@+id/tvAllNumber"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </TableRow>
         </TableLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
