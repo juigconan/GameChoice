@@ -17,8 +17,7 @@ class DBConnection{
         var password = R.string.DBPASS.toString()
         try{
             Class.forName("net.sourceforge.jtds.jdbc.Driver")
-            // TODO: Cambiar la base de datos
-            connString = "jdbc:jtds:sqlserver://sqlservergamechoice.database.windows.net:1433;DatabaseName=sqldbgamechoice;user=juigconan@sqlservergamechoice;password=$password;Protocol=TLSv1.2;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=60;ssl=request"
+            connString = "jdbc:jtds:sqlserver://sqlservergamechoice.database.windows.net:1433;DatabaseName=sqldbgamechoice;user=juigconan@sqlservergamechoice;password={$password};Protocol=TLSv1.2;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=60;ssl=request"
             conn = DriverManager.getConnection(connString)
         }catch(ex : SQLException){
             Log.e("sqlEx", ex.message.toString())
