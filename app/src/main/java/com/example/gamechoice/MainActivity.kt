@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import com.example.gamechoice.databinding.ActivityMainBinding
 import com.example.gamechoice.fragments.ChatFragment
 import com.example.gamechoice.fragments.HomeFragment
-import com.example.gamechoice.fragments.NotesFragment
+import com.example.gamechoice.fragments.OptionsFragment
 import com.example.sharedpreferences071123.Preferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(fragment)
         }
         binding.ibNotes.setOnClickListener{
-            val fragment = NotesFragment()
+            val fragment = OptionsFragment()
             replaceFragment(fragment)
         }
 

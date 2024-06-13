@@ -77,7 +77,7 @@ class HomeFragment : Fragment(R.layout.fragment_home){
                 req.setString(1, "%$game%")
                 var resultSet = req.executeQuery()
                 while(resultSet.next()){
-                    var game = GameModel(resultSet.getInt("steamIndex"),
+                    var game = GameModel(resultSet.getInt("hltbIndex"),
                         resultSet.getString("Name"),
                         resultSet.getDouble("Main"),
                         resultSet.getDouble("Main + Sides"),
