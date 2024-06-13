@@ -1,6 +1,5 @@
 package com.example.gamechoice.providers
 
-import com.example.gamechoice.models.Game
 import com.example.gamechoice.models.GameModel
 import retrofit2.http.GET
 import retrofit2.http.Query
