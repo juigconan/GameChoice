@@ -33,15 +33,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentHomeBinding.inflate(layoutInflater)
-    }/*
-
-    private fun setAdapters(view: View) {
-        val layoutManager = LinearLayoutManager(context)
-        recycler = view.findViewById(R.id.recyclerGames)
-        recycler.layoutManager = layoutManager
-        binding.recyclerGames.adapter = gameAdapter
-    }*/
-
+    }
     private fun setAdapters(view: View) {
         recyclerView = view.findViewById(R.id.recyclerGames)
         searchView = view.findViewById(R.id.searchView)
@@ -65,13 +57,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         })
 
-        loadGames()
         return view
     }
     private fun loadGames(game: String?) {
         lifecycleScope.launch (Dispatchers.IO){
                 var lista = mutableListOf<Game>()
-                val req: PreparedStatement? = dbConn.dbConnect()?.prepareStatement("SELECT * FROM gamechoice WHERE Name like ?")
+                val req: PreparedStatement? = dbConn.dbConnect()?.prepareStatement("SELECT * FROM hltb WHERE Name like ?")
                 if (req != null) {
                     req.setString(1, "%$game%")
                     var resultSet = req.executeQuery()
@@ -81,7 +72,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             resultSet.getDouble("Main"),
                             resultSet.getDouble("Main + Sides"),
                             resultSet.getDouble("Completionist"),
-                            resultSet.getDouble("All Styles"))
+                            resultSet.getDouble("All Styles"),
+                            )
                         lista.add(game)
                     }
                     gameAdapter.lista = lista
