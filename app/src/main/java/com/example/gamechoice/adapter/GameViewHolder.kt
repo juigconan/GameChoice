@@ -8,15 +8,15 @@ import com.squareup.picasso.Picasso
 
 class GameViewHolder(val v: View) : RecyclerView.ViewHolder(v)  {
     private val binding =  CardLayoutBinding.bind(v)
-    fun render(game: GameModel, onClick: () -> Unit) {
+    fun render(game: GameModel, onItemSelect: (GameModel) -> Unit) {
         binding.tvGameName.text = game.name
         binding.tvMainNumber.text = game.main.toString()
         binding.tvCompletionistNumber.text = game.completionist.toString()
         binding.tvSidesNumber.text = game.side.toString()
         binding.tvAllNumber.text = game.all.toString()
         Picasso.get().load(game.image).into(binding.ivGameImage)
-        itemView.setOnClickListener {
-            onClick()
+        itemView.setOnClickListener{
+            onItemSelect(game)
         }
     }
 }

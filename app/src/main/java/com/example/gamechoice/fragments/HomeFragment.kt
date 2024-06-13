@@ -37,7 +37,7 @@ class HomeFragment : Fragment(R.layout.fragment_home){
         recyclerView = view.findViewById(R.id.recyclerGames)
         searchView = view.findViewById(R.id.searchView)
 
-        gameAdapter = GameAdapter(mutableListOf()){viewGame()}
+        gameAdapter = GameAdapter(mutableListOf()){viewGame(it)}
         recyclerView.adapter = gameAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
     }
