@@ -62,6 +62,7 @@
                     android:id="@+id/tvMainNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAlignment="center"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -81,6 +82,7 @@
                     android:id="@+id/tvSidesNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAlignment="center"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -100,6 +102,7 @@
                     android:id="@+id/tvCompletionistNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAlignment="center"
                     android:textColor="@color/black" />
             </TableRow>
 
@@ -119,6 +122,7 @@
                     android:id="@+id/tvAllNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAlignment="center"
                     android:textColor="@color/black" />
             </TableRow>
         </TableLayout>

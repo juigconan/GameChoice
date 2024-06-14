@@ -17,7 +17,7 @@ class ChatViewHolder(v : View): RecyclerView.ViewHolder(v) {
         if (user == mensaje.user){
             binding.consLayout.setBackgroundColor(binding.consLayout.context.getColor(R.color.gold))
         }else{
-            binding.consLayout.setBackgroundColor(binding.consLayout.context.getColor(R.color.medium_green))
+            binding.consLayout.setBackgroundColor(binding.consLayout.context.getColor(R.color.light_green))
         }
     }
 
