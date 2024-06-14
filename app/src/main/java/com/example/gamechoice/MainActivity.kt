@@ -43,6 +43,9 @@ class MainActivity : AppCompatActivity() {
                 auth.signOut()
                 startActivity(Intent(this, LoginActivity::class.java))
             }
+            R.id.itemAbout ->{
+                startActivity(Intent(this, AboutActivity::class.java))
+            }
 
         }
         return super.onOptionsItemSelected(item)

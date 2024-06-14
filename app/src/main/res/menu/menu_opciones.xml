@@ -6,6 +6,9 @@
         android:id="@+id/itemLogout"
         android:title="Logout" />
     <item
+        android:id="@+id/itemAbout"
+        android:title="About" />
+    <item
         android:id="@+id/itemExit"
         android:title="Exit" />
 </menu>
