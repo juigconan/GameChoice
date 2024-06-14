@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,10 +14,8 @@ import com.example.gamechoice.DBConnection
 import com.example.gamechoice.GameActivity
 import com.example.gamechoice.R
 import com.example.gamechoice.adapter.GameAdapter
-import com.example.gamechoice.adapter.NoteAdapter
-import com.example.gamechoice.databinding.FragmentShopBinding
+import com.example.gamechoice.databinding.FragmentNotesBinding
 import com.example.gamechoice.models.GameModel
-import com.example.gamechoice.models.NoteModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,8 +27,8 @@ import kotlinx.coroutines.withContext
 import java.lang.Thread.sleep
 import java.sql.PreparedStatement
 
-class ShopFragment : Fragment(R.layout.fragment_shop) {
-    private lateinit var binding: FragmentShopBinding
+class NotesFragment : Fragment(R.layout.fragment_notes) {
+    private lateinit var binding: FragmentNotesBinding
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private lateinit var recyclerView: RecyclerView
@@ -40,10 +37,10 @@ class ShopFragment : Fragment(R.layout.fragment_shop) {
     private  var dbConn = DBConnection()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentShopBinding.inflate(layoutInflater)
+        binding = FragmentNotesBinding.inflate(layoutInflater)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_shop, container, false)
+        val view = inflater.inflate(R.layout.fragment_notes, container, false)
         setAdapters(view)
         loadFromDB()
         sleep(1000) //Sin esto no funciona
