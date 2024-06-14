@@ -14,43 +14,97 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toStartOf="@+id/tableLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
     <TextView
         android:id="@+id/tvName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:singleLine="false"
         android:text="Name"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.446"
-        app:layout_constraintStart_toEndOf="@+id/ivGame"
-        app:layout_constraintTop_toTopOf="@+id/ivGame" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
-        android:id="@+id/tableLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivGame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivGame"
-        app:layout_constraintTop_toBottomOf="@+id/tvName">
+        app:layout_constraintTop_toTopOf="@+id/ivGame">
 
         <TableRow
-            android:id="@+id/trStyle"
+            android:id="@+id/trMain"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Main" />
+
+            <TextView
+                android:id="@+id/tvMainNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
 
         <TableRow
-            android:id="@+id/trTime"
+            android:id="@+id/trSide"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/tvSides"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Side" />
+
+            <TextView
+                android:id="@+id/tvSidesNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trCompletion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvCompletionist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Completionist" />
+
+            <TextView
+                android:id="@+id/tvCompletionistNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trAll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/All" />
+
+            <TextView
+                android:id="@+id/tvAllNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
     </TableLayout>
 
     <androidx.recyclerview.widget.RecyclerView

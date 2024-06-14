@@ -14,7 +14,7 @@ class DBConnection{
         StrictMode.setThreadPolicy(policy)
         var conn: Connection? = null
         val connString: String
-        var password = ""
+        var password = "Rootroot1"
         try{
             Class.forName("net.sourceforge.jtds.jdbc.Driver")
             connString = "jdbc:jtds:sqlserver://sqlservergamechoice.database.windows.net:1433;DatabaseName=sqldbgamechoice;user=juigconan@sqlservergamechoice;password=$password;Protocol=TLSv1.2;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=60;ssl=request;useLOBs=false"

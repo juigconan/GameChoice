@@ -175,10 +175,14 @@ class GameActivity : AppCompatActivity() {
 
     private fun getData() {
         val data = intent.extras
-        val gameModel = data?.getSerializable("GAME") as GameModel
-        binding.tvName.text = gameModel.name
-        Picasso.get().load(gameModel.image).into(binding.ivGame)
-        gameid = gameModel.appid
+        val game = data?.getSerializable("GAME") as GameModel
+        binding.tvName.text = game.name
+        binding.tvMainNumber.text = game.main.toString()
+        binding.tvCompletionistNumber.text = game.completionist.toString()
+        binding.tvSidesNumber.text = game.side.toString()
+        binding.tvAllNumber.text = game.all.toString()
+        Picasso.get().load(game.image).into(binding.ivGame)
+        gameid = game.appid
     }
 
 }

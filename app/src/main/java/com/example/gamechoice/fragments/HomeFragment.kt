@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -28,6 +30,7 @@ class HomeFragment : Fragment(R.layout.fragment_home){
     private var gameAdapter = GameAdapter(emptyList()){viewGame(it)}
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: SearchView
+    private lateinit var radioGroup: RadioGroup
     private  var dbConn = DBConnection()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +39,8 @@ class HomeFragment : Fragment(R.layout.fragment_home){
     private fun setAdapters(view: View) {
         recyclerView = view.findViewById(R.id.recyclerGames)
         searchView = view.findViewById(R.id.searchView)
-
+        radioGroup = view.findViewById(R.id.radioGroup)
+        view.findViewById<RadioButton>(R.id.rbCualquiera).isChecked = true
         gameAdapter = GameAdapter(mutableListOf()){viewGame(it)}
         recyclerView.adapter = gameAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -46,13 +50,27 @@ class HomeFragment : Fragment(R.layout.fragment_home){
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         setAdapters(view)
         setListeners()
+        loadGames("")
         return view
     }
 
     private fun setListeners() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                loadGames(query)
+                when(radioGroup.checkedRadioButtonId){
+                    R.id.rbMenos20 ->{
+                        loadGamesTime(query,20, false)
+                    }
+                    R.id.rbMenos60 ->{
+                        loadGamesTime(query, 60, false)
+                    }
+                    R.id.rbMas60->{
+                        loadGamesTime(query, 60, true)
+                    }
+                    R.id.rbCualquiera ->{
+                        loadGames(query)
+                    }
+                }
                 return true
             }
 
@@ -68,13 +86,22 @@ class HomeFragment : Fragment(R.layout.fragment_home){
         }
         startActivity(i)
     }
-
-    private fun loadGames(game: String?) {
+    private fun loadGamesTime(game: String?, time: Int, gt: Boolean) {
         lifecycleScope.launch (Dispatchers.IO){
             var lista = mutableListOf<GameModel>()
-            val req: PreparedStatement? = dbConn.dbConnect()?.prepareStatement("SELECT * FROM hltb WHERE Name like ?")
+            var req: PreparedStatement? = dbConn.dbConnect()?.prepareStatement("SELECT TOP(100) * FROM hltb WHERE Main < ?")
+                if(!game.isNullOrBlank() && gt){
+                    req = dbConn.dbConnect()?.prepareStatement("SELECT * FROM hltb WHERE Name like ? AND Main > ?")
+                }else if(!game.isNullOrBlank()){
+                    req = dbConn.dbConnect()?.prepareStatement("SELECT * FROM hltb WHERE Name like ? AND Main < ?")
+                }
             if (req != null) {
-                req.setString(1, "%$game%")
+                if(!game.isNullOrBlank()){
+                    req.setString(1, "%$game%")
+                    req.setInt(2, time)
+                }else{
+                    req.setInt(1, time)
+                }
                 var resultSet = req.executeQuery()
                 while(resultSet.next()){
                     var game = GameModel(resultSet.getInt("hltbIndex"),
@@ -83,8 +110,40 @@ class HomeFragment : Fragment(R.layout.fragment_home){
                         resultSet.getDouble("Main + Sides"),
                         resultSet.getDouble("Completionist"),
                         resultSet.getDouble("All Styles"),
-                        resultSet.getString("Image")
-                        )
+                        resultSet.getString("Image"))
+                    lista.add(game)
+                }
+                gameAdapter.lista = lista
+                req.close()
+            }else{
+                Log.e("ERROR", "Result de la DB es null")
+            }
+            withContext(Dispatchers.Main){
+                gameAdapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun loadGames(game: String?) {
+        lifecycleScope.launch (Dispatchers.IO){
+            var lista = mutableListOf<GameModel>()
+            var req: PreparedStatement? = dbConn.dbConnect()?.prepareStatement("SELECT TOP(100) * FROM hltb ORDER BY rand()")
+            if(!game.isNullOrBlank()) {
+                req = dbConn.dbConnect()?.prepareStatement("SELECT * FROM hltb WHERE Name like ? AND Main > ?")
+            }
+            if (req != null) {
+                if(!game.isNullOrBlank()) {
+                    req.setString(1, "%$game%")
+                }
+                var resultSet = req.executeQuery()
+                while(resultSet.next()){
+                    var game = GameModel(resultSet.getInt("hltbIndex"),
+                        resultSet.getString("Name"),
+                        resultSet.getDouble("Main"),
+                        resultSet.getDouble("Main + Sides"),
+                        resultSet.getDouble("Completionist"),
+                        resultSet.getDouble("All Styles"),
+                        resultSet.getString("Image"))
                         lista.add(game)
                 }
                     gameAdapter.lista = lista
