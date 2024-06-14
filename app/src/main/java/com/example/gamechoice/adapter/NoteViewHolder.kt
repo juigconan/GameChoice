@@ -7,8 +7,12 @@ import com.example.gamechoice.models.NoteModel
 
 class NoteViewHolder(val v: View) : RecyclerView.ViewHolder(v)  {
     private val binding =  NoteLayoutBinding.bind(v)
-    fun render(note: NoteModel) {
+    fun render(note: NoteModel, onLongPressFun: (NoteModel) -> Unit) {
         binding.tvFecha.text = note.date
         binding.tvNota.text = note.text
+        itemView.setOnLongClickListener(){
+            onLongPressFun(note)
+            true
+        }
     }
 }
