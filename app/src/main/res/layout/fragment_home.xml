@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_green"
     tools:context=".fragments.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +16,8 @@
             android:id="@+id/searchView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_green"
+            android:foregroundTint="@color/dark_green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -27,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Duracion deseda:"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="25"
                 android:text="Menos de 20h"
+                android:textColor="@color/black"
                 android:textSize="10dp" />
 
             <RadioButton
@@ -55,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="25"
                 android:text="Menos de 60h"
+                android:textColor="@color/black"
                 android:textSize="10dp" />
 
             <RadioButton
@@ -63,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="25"
                 android:text="Mas de 60h"
+                android:textColor="@color/black"
                 android:textSize="10dp" />
 
             <RadioButton
@@ -71,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="25"
                 android:text="Cualquiera"
+                android:textColor="@color/black"
                 android:textSize="10dp" />
 
         </RadioGroup>

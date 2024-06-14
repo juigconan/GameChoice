@@ -13,12 +13,14 @@
         android:name="com.example.gamechoice.fragments.HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="91" />
+        android:layout_weight="91"
+        android:background="@color/gold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_weight="9"
+        android:background="@color/medium_green"
         android:orientation="horizontal">
 
         <ImageButton
@@ -26,6 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="33"
+            android:backgroundTint="@color/dark_green"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/notes_icon" />
 
@@ -34,6 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="34"
+            android:backgroundTint="@color/dark_green"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/home_icon" />
 
@@ -42,6 +46,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="33"
+            android:backgroundTint="@color/dark_green"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/chat_icon" />
     </LinearLayout>

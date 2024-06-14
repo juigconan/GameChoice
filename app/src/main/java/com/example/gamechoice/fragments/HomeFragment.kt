@@ -89,7 +89,7 @@ class HomeFragment : Fragment(R.layout.fragment_home){
     private fun loadGamesTime(game: String?, time: Int, gt: Boolean) {
         lifecycleScope.launch (Dispatchers.IO){
             var lista = mutableListOf<GameModel>()
-            var req: PreparedStatement? = dbConn.dbConnect()?.prepareStatement("SELECT TOP(100) * FROM hltb WHERE Main < ?")
+            var req: PreparedStatement? = dbConn.dbConnect()?.prepareStatement("SELECT TOP(100) * FROM hltb WHERE Main > ?")
                 if(!game.isNullOrBlank() && gt){
                     req = dbConn.dbConnect()?.prepareStatement("SELECT * FROM hltb WHERE Name like ? AND Main > ?")
                 }else if(!game.isNullOrBlank()){
@@ -129,7 +129,7 @@ class HomeFragment : Fragment(R.layout.fragment_home){
             var lista = mutableListOf<GameModel>()
             var req: PreparedStatement? = dbConn.dbConnect()?.prepareStatement("SELECT TOP(100) * FROM hltb ORDER BY rand()")
             if(!game.isNullOrBlank()) {
-                req = dbConn.dbConnect()?.prepareStatement("SELECT * FROM hltb WHERE Name like ? AND Main > ?")
+                req = dbConn.dbConnect()?.prepareStatement("SELECT * FROM hltb WHERE Name like ?")
             }
             if (req != null) {
                 if(!game.isNullOrBlank()) {

@@ -1,7 +1,6 @@
 package com.example.gamechoice.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamechoice.R
-import com.example.gamechoice.adapter.GameAdapter
 import com.example.gamechoice.databinding.FragmentChatBinding
 import com.example.gamechoice.models.MensajeModel
 import com.example.mensajes041223.adapter.ChatAdapter
@@ -23,7 +21,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import java.lang.Thread.sleep
 
 class ChatFragment : Fragment(R.layout.fragment_chat) {
     private lateinit var binding: FragmentChatBinding
@@ -52,14 +49,12 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
     private fun setListener(view: View) {
         view.findViewById<ImageView>(R.id.ivSend).setOnClickListener{
             var contenido = view.findViewById<EditText>(R.id.etChat).text.toString().trim()
-            Log.d("PUTA", "Estamos en el listener")
             if(contenido.isNotEmpty()){
                 val fecha = System.currentTimeMillis()
                 val mensaje = MensajeModel(contenido, user, fecha)
                 reference.child(fecha.toString()).setValue(mensaje)
                     .addOnSuccessListener {
                         view.findViewById<EditText>(R.id.etChat).setText("")
-                        Log.d("PUTA", "Mandado el mensaje")
                     }
                     .addOnFailureListener{
 
@@ -104,23 +99,4 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         dataBase = FirebaseDatabase.getInstance("https://gamechoice-14073-default-rtdb.firebaseio.com/")
         reference = dataBase.getReference("mensajesChat")
     }
-    /*
-        override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-            val inflater = menuInflater.inflate(R.menu.menu_opciones, menu)
-            return super.onCreateOptionsMenu(menu)
-        }
-
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            when(item.itemId){
-                R.id.itemSalir ->{
-                    finishAffinity()
-                }
-                R.id.itemCerrar ->{
-                    auth.signOut()
-                    finishActivity(5)
-                }
-
-            }
-            return super.onOptionsItemSelected(item)
-        }*/
 }

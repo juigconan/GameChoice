@@ -2,10 +2,12 @@ package com.example.mensajes041223.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gamechoice.R
 import com.example.gamechoice.databinding.MensajesLayoutBinding
 import com.example.gamechoice.models.MensajeModel
 import java.text.SimpleDateFormat
 import java.util.Date
+
 
 class ChatViewHolder(v : View): RecyclerView.ViewHolder(v) {
     private val binding = MensajesLayoutBinding.bind(v)
@@ -13,9 +15,9 @@ class ChatViewHolder(v : View): RecyclerView.ViewHolder(v) {
         binding.tvMensaje.text = mensaje.mensaje
         binding.tvFecha.text = fecha(mensaje.fecha)
         if (user == mensaje.user){
-            //binding.consLayout.setBackgroundColor(binding.consLayout.context.getColor(R.color.blue))
+            binding.consLayout.setBackgroundColor(binding.consLayout.context.getColor(R.color.gold))
         }else{
-            //binding.consLayout.setBackgroundColor(binding.consLayout.context.getColor(R.color.green))
+            binding.consLayout.setBackgroundColor(binding.consLayout.context.getColor(R.color.medium_green))
         }
     }
 

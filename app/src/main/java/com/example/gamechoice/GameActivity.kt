@@ -45,6 +45,8 @@ class GameActivity : AppCompatActivity() {
         setAdapters()
         setListeners()
         loadNotes()
+        sleep(1000)
+        loadGamesNotes()
     }
 
     private fun deleteNote(note: NoteModel) {
@@ -97,21 +99,27 @@ class GameActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.w("ERROR", "Error getting documents.", exception)
             }
+
+        }
+        loadGamesNotes()
+    }
+
+    private fun loadGamesNotes() {
+        lifecycleScope.launch(Dispatchers.Unconfined) {
             noteAdapter.lista = lista
-            withContext(Dispatchers.Main){
-                waitForDB()
+            withContext(Dispatchers.Main) {
+                noteAdapter.notifyDataSetChanged()
             }
         }
     }
 
-
     private fun setAdapters() {
-        recyclerView = binding.noteRecycler
-        firestore = Firebase.firestore
-        noteAdapter = NoteAdapter(mutableListOf()) { deleteNote(it) }
-        auth = Firebase.auth
-        recyclerView.adapter = noteAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+    recyclerView = binding.noteRecycler
+    firestore = Firebase.firestore
+    noteAdapter = NoteAdapter(mutableListOf()) { deleteNote(it) }
+    auth = Firebase.auth
+    recyclerView.adapter = noteAdapter
+    recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     private fun setListeners() {
